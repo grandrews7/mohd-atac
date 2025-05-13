@@ -1,0 +1,9 @@
+executor: slurm
+#use-conda: True
+use-singularity: True
+singularity-prefix: '/zata/zippy/andrewsg/projects/tf-atlas/env'
+singularity-args: '-B /zata:/zata -B /data:/data --nv'
+#directory: '/zata/zippy/andrewsg/projects/tf-atlas/'
+jobs: 128
+latency-wait: 10
+restart-times: 0
