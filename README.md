@@ -46,7 +46,7 @@ This repository contains a modular Snakemake pipeline for processing ATAC-seq da
 1. **Clone this repository**
 
    ```bash
-   git clone https://github.com/grandrews/mohd-atac.git
+   git clone https://github.com/grandrews7/mohd-atac.git
    cd mohd-atac
    ```
 
