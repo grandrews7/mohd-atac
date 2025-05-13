@@ -32,15 +32,6 @@ This repository contains a modular Snakemake pipeline for processing ATAC-seq da
 
 ---
 
-## Prerequisites
-
-* **Conda** (Miniconda or Anaconda)
-* **Snakemake** ≥ 6.0
-* **Bowtie2**, **samtools**, **Picard**, **MACS3**, **bedtools**, **bedGraphToBigWig**, **Cutadapt**, **FastQC**
-* **Python** 3.7+ with required libraries (listed in environment YAMLs under `envs/`)
-
----
-
 ## Installation
 
 1. **Clone this repository**
@@ -53,24 +44,14 @@ This repository contains a modular Snakemake pipeline for processing ATAC-seq da
 2. **Create and activate a Snakemake environment**
 
    ```bash
-   conda create -n snakemake-env snakemake=7.0 python=3.8
-   conda activate snakemake-env
+   mamba create -n snakemake-env -f env/snakemake.yaml
    ```
 
-3. **Install additional tools** (example using mamba)
+3. **Create environment with required software
 
    ```bash
-   mamba install -n snakemake-env -c bioconda \
-     bowtie2 samtools picard macs3 bedtools \
-     bedGraphToBigWig cutadapt fastqc
+   mamba create -n MOHD-ATAC -f env/mohd-atac.yaml
    ```
-
-4. **Verify installation**
-
-   ```bash
-   snakemake --version
-   ```
-
 ---
 
 ## Configuration (`config.yaml`)
@@ -99,9 +80,10 @@ Modify paths or add additional genomes, q-values, or samples as needed.
 
 ## Usage
 
-Run the full pipeline with four cores (adjust `--cores` as needed):
+Run the full pipeline with 64 cores using conda/mamba (adjust `--cores` as needed):
 
 ```bash
+mamba activate snakemake-env
 snakemake \
   --cores 4 \
   --use-conda \
@@ -109,7 +91,7 @@ snakemake \
   --printshellcmds
 ```
 
-Or submit via a cluster profile:
+Or submit to slurm:
 
 ```bash
 snakemake \
@@ -125,13 +107,13 @@ snakemake \
 2. **Cutadapt** trimming
 3. **FastQC** (trimmed)
 4. **Bowtie2** alignment (paired-end)
-5. **BAM** filtering, mate fixing, deduplication (Picard)
-6. **BEDPE** & tagAlign conversion
-7. **MACS3** peak calling (fixed & variable q-values)
-8. **bedGraph** → **BigWig** conversion
+5. **Alignment filtering** filtering, mate fixing, deduplication (Picard)
+6. **BEDPE/tagAlign** Convert alignments to BEDPE & ENCODE tagAlign formats
+7. **MACS3** peak calling (variable q-values)
+8. **bedGraphToBigWig** → convert signal to bigWig format
 9. **QC metrics:** fragment-length distribution, TSS enrichment, FRiP
-10. **ChromBPNet** preprocessing & bias modeling
-11. **Pseudoreplicate** splitting & **IDR** analysis
+11. **Pseudoreplicates**
+12. **IDR** analysis
 
 ---
 
