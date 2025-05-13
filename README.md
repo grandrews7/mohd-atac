@@ -1,4 +1,4 @@
-# ATAC-seq Snakemake Pipeline
+# MOHD ATAC-seq Snakemake Pipeline
 
 This repository contains a modular Snakemake pipeline for processing ATAC-seq data from raw FASTQ files through quality control, alignment, peak calling, and downstream analyses (e.g., fragment-length distribution, TSS enrichment, FRiP). The workflow is fully configurable via a `config.yaml` file.
 
@@ -46,8 +46,8 @@ This repository contains a modular Snakemake pipeline for processing ATAC-seq da
 1. **Clone this repository**
 
    ```bash
-   git clone https://github.com/your-org/atac-seq-snakemake.git
-   cd atac-seq-snakemake
+   git clone https://github.com/grandrews/mohd-atac.git
+   cd mohd-atac
    ```
 
 2. **Create and activate a Snakemake environment**
